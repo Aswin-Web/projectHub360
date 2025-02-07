@@ -1,5 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+// import { GOOGLE_CLIENT_ID, GOOGLE_SECRET_ID } from './config/config';
+// import * as dotenv from 'dotenv';
+
+// dotenv.config({ path: '/.env' });
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

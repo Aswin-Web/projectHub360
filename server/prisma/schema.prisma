@@ -1,0 +1,41 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "mysql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  user_id        String      @id @default(uuid())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+  picture   String?
+
+  Organization Organization[]
+}
+
+model Organization {
+  org_id Int @id @default(autoincrement())
+  org_external_name String
+  org_internal_name String
+  user_id String
+  created_at DateTime
+  update_at DateTime
+  user User @relation(fields: [user_id],references: [user_id])
+
+  SubOrganization SubOrganization[]
+}
+
+model SubOrganization{
+  sub_org_id Int @id @default(autoincrement())
+  sub_external_name String 
+  org_id Int
+  user_id String
+  created_at DateTime
+  updated_at DateTime
+  org Organization @relation(fields: [org_id],references: [org_id])
+}
+
