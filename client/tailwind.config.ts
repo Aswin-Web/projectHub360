@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#F5F5F5",
+        background: "#F1F1F1",
         foreground: "var(--foreground)",
         textColor:"#424242",
         buttonBorderColor:"",
@@ -17,8 +17,9 @@ export default {
         subHeadingColor:"#66BFBF",
         logoMain1:"#09122C",
         logoMain2:"#872341",
-        darkColor:"#48CFCB",
-        lightColor:"#F2EFE7"
+        darkColor:"#FFFFFF",
+        lightColor:"#F8F8F8",
+        blackColor:"#2d2d2d"
       },
     },
   },

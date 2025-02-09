@@ -5,7 +5,7 @@ import NavbarMenuItem from "./NavbarMenuItem";
 const NavbarMenu = ({
   data,
 }: {
-  data: { name: string; logo: string; link: string }[];
+  data: { name: string; logo: React.ReactNode; link: string }[];
 }) => {
   return (
     <>

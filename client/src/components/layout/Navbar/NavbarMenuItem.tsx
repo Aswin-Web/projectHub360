@@ -5,8 +5,8 @@ import Link from "next/link";
 const NavbarMenuItem = ({
   item,
 }: {
-  item: { name: string; logo: string; link: string };
+  item: { name: string; logo: React.ReactNode; link: string };
 }) => {
-  return <Link className="text-textColor" href={item.link}>{item.name}</Link>;
+  return <Link className="text-textColor" href={item.link}>{item.logo}</Link>;
 };
 export default NavbarMenuItem;

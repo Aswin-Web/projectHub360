@@ -1,12 +1,17 @@
+import HomePage from "@/components/layout/Home/HomePage";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      Welcome to our app  
-
-      <Link href={"/auth"} className="m-1 p-2 ">Sign In with Google</Link>
+    <div className="w-5/6 mx-auto overflow-y-scroll h-[85vh]">
+      <div className="flex flex-row justify-between">
+        Welcome to our app
+        <Link href={"/auth"} className="m-1 p-2 ">
+          Sign In with Google
+        </Link>
+      </div>
+      <HomePage />
     </div>
   );
 }

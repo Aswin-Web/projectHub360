@@ -24,12 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`bg-background`}
-      >
-        <div className=" min-h-[100vh] w-[100vw]">
-        {children}
-        </div>
+      <body className={`overflow-hidden`}>
+        <div className=" min-h-[100vh] w-[100vw]">{children}</div>
       </body>
     </html>
   );
