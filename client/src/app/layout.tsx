@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`overflow-hidden`}>
+      <body >
         <div className=" min-h-[100vh] w-[100vw]">{children}</div>
       </body>
     </html>

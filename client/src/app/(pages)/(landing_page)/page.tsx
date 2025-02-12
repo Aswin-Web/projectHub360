@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="w-5/6 mx-auto overflow-y-scroll h-[85vh]">
+    <div className="w-5/6 mx-auto">
       <div className="flex flex-row justify-between">
         Welcome to our app
         <Link href={"/auth"} className="m-1 p-2 ">

@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE `Services` MODIFY `order_no` INTEGER NOT NULL DEFAULT 0,
+    MODIFY `disable` BOOLEAN NOT NULL DEFAULT true,
+    MODIFY `updated_At` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    MODIFY `service_descp` VARCHAR(191) NULL,
+    MODIFY `service_icon` VARCHAR(191) NULL;

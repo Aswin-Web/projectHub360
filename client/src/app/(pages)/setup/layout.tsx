@@ -32,7 +32,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     <div className="">
       <div className="w-full flex">
         {/* Sidebar */}
-        <div className="w-[15%]">
+        <div className="w-[15%] h-[100vh]">
           <SidebarLayout>
             <SidebarMenuList list={sidebarMenu} />
           </SidebarLayout>

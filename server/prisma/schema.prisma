@@ -39,3 +39,30 @@ model SubOrganization{
   org Organization @relation(fields: [org_id],references: [org_id])
 }
 
+// Services
+model Services{
+  service_id Int @id @default(autoincrement())
+  service_internal_name String
+  service_external_name String 
+  service_descp String?
+  service_icon String?
+  order_no Int @default(0)
+  disable Boolean @default(true)
+  created_at DateTime @default(now())
+  updated_At DateTime @updatedAt @default(now())
+} 
+enum SERVICETYPE{
+  TICKETING
+  TABLE
+  PRODUCT
+}
+
+model OrgServices {
+  org_service_id String @id @default(uuid())
+  service_id Int 
+  service_type SERVICETYPE 
+  org_user_id Int 
+  org_id Int 
+  created_at DateTime
+  updated_at DateTime
+}

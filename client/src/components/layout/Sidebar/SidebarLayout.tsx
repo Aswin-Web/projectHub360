@@ -4,7 +4,7 @@ const SidebarMenuItems = [
   { name: "SubOrganization", link: "setup/sub-org", logo: "" },
 ];
 const SidebarLayout = ({ children }:{children:React.ReactNode}) => {
-  return <div className="h-[90vw] w-full bg-lightColor border-2">{children}</div>;
+  return <div className="h-full w-full bg-lightColor border-2">{children}</div>;
 };
 
 export default SidebarLayout;

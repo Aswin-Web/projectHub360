@@ -8,7 +8,7 @@ const ServiceCard = () => {
       {/* Service Name */}
       <div className="h-1/6  w-full text-base tracking-wider font-medium mx-4 mt-1">
         {" "}
-        Recurring Service
+        Recurring Service   
       </div>
       {/* Service Body */}
       <div className="h-4/6 overflow-hidden mx-2 font-light text-justify">

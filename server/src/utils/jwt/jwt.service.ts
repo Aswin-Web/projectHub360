@@ -11,10 +11,9 @@ export class JwtService {
   }
   //   SSO_KEY = config().SSO_KEY;
   async signSSOToken(user: User): Promise<string> {
-    console.log('🚀 ~ JwtService ~ SSO_KEY:', this.SSO_KEY);
     return new Promise((resolve, reject) => {
       jwt.sign(
-        { id: user.id, email: user.email }, // Avoid passing the full user object for security
+        { id: user.user_id, email: user.email }, // Avoid passing the full user object for security
         this.SSO_KEY,
         { expiresIn: '1h' }, // Set an expiration time
         (err, token) => {
