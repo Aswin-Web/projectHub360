@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Organization } from '@prisma/client';
+import { SubOrgObj } from '../sub-org/sub-org.model';
 
 @ObjectType()
 export class OrganizationObj implements Organization {
@@ -21,6 +22,6 @@ export class OrganizationObj implements Organization {
   update_at: Date;
 
   // user User @relation(fields: [user_id],references: [user_id])
-
-  // SubOrganization SubOrganization[]
+  @Field(() => [SubOrgObj])
+  SubOrganization: SubOrgObj[];
 }

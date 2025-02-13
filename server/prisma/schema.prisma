@@ -15,6 +15,8 @@ model User {
   picture   String?
 
   Organization Organization[]
+
+  SubOrganization SubOrganization[]
 }
 
 model Organization {
@@ -27,6 +29,7 @@ model Organization {
   user User @relation(fields: [user_id],references: [user_id])
 
   SubOrganization SubOrganization[]
+  OrgServices OrgServices[]
 }
 
 model SubOrganization{
@@ -37,6 +40,7 @@ model SubOrganization{
   created_at DateTime
   updated_at DateTime
   org Organization @relation(fields: [org_id],references: [org_id])
+  user User @relation(fields: [user_id],references: [user_id])
 }
 
 // Services
@@ -50,6 +54,8 @@ model Services{
   disable Boolean @default(true)
   created_at DateTime @default(now())
   updated_At DateTime @updatedAt @default(now())
+
+  OrgServices OrgServices[]
 } 
 enum SERVICETYPE{
   TICKETING
@@ -65,4 +71,16 @@ model OrgServices {
   org_id Int 
   created_at DateTime
   updated_at DateTime
+  org Organization @relation(fields: [org_id],references: [org_id])
+  org_user OrgUsers @relation(fields: [org_user_id],references: [org_user_id])
+  service Services @relation(fields: [service_id],references: [service_id])
+}
+
+model OrgUsers {
+  org_user_id Int @id @default(autoincrement())
+  org_id Int 
+  user_id Int
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+  OrgServices OrgServices[]
 }

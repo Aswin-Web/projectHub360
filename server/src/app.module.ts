@@ -11,6 +11,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { AppResolver } from './utils/test.utils';
 import { OrganizationModule } from './graphql/organization/organization.module';
+import { ServicesModule } from './graphql/services/services.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,14 +19,24 @@ import { OrganizationModule } from './graphql/organization/organization.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      // playground: true,
+      playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      path: '/api/v1',
       sortSchema: true,
+      // useGlobalPrefix: '/api/v1',
       // include: [TicketsController],
     }),
     OrganizationModule,
+    ServicesModule,
   ],
   controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, PrismaService, JwtService, AppResolver],
+  providers: [
+    AppService,
+    AuthService,
+    PrismaService,
+    JwtService,
+    AppResolver,
+    // ServicesModule,
+  ],
 })
 export class AppModule {}

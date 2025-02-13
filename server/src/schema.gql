@@ -8,6 +8,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type OrganizationObj {
+  SubOrganization: [SubOrgObj!]!
   created_at: DateTime!
   org_external_name: String!
   org_id: Int!
@@ -17,6 +18,29 @@ type OrganizationObj {
 }
 
 type Query {
+  getServices: [ServiceObj!]!
   hello: String!
   organization: [OrganizationObj!]!
+}
+
+type ServiceObj {
+  created_at: DateTime!
+  disable: Boolean!
+  order_no: Float!
+  service_descp: String!
+  service_external_name: String!
+  service_icon: String!
+  service_id: Float!
+  service_internal_name: String!
+  updated_At: DateTime!
+}
+
+type SubOrgObj {
+  created_at: DateTime!
+  org: OrganizationObj!
+  org_id: Float!
+  sub_external_name: String!
+  sub_org_id: Float!
+  updated_at: DateTime!
+  user_id: String!
 }
