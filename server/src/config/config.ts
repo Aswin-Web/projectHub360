@@ -4,4 +4,5 @@ export const config = () => ({
   SERVER_URL: process.env.SERVER_URL,
   SSO_KEY: process.env.SSO_KEY,
   CLIENT_URL: process.env.CLIENT_URL,
+  PUBLIC_DOMAINS: ['gmail', 'outlook'],
 });

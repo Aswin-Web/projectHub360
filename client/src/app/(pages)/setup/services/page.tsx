@@ -3,10 +3,19 @@ import ServiceCard from "@/components/ServiceCard";
 import TextHelper from "@/components/text/TextHelper";
 import React, { useEffect, useState } from "react";
 import { getServices } from "./networkcalls.purchase";
-const item = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 1, 1, 1];
+import { SlQuestion } from "react-icons/sl";
+
+interface serviceINT {
+  service_external_name: string;
+  service_descp: string;
+  purchaseButton: React.ReactNode;
+  infoButton: React.ReactNode;
+  service_internal_name: string;
+  service_id: string;
+}
 
 const page = () => {
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState<serviceINT[]>([]);
   useEffect(() => {
     getServices()
       .then((item) => {
@@ -14,6 +23,25 @@ const page = () => {
       })
       .catch(() => alert("services fetching failed"));
   }, []);
+
+  const modifiedServicesHelper = services.map(
+    (item) => {
+      const purchaseButton = <button className=" border-2 text-sm rounded-md px-1 border-black" >Purchase</button>;
+      const infoButton =     <button className="" ><SlQuestion/></button>;
+      let returnObj = {
+        service_id: item.service_id,
+        service_descp: item.service_descp,
+        service_external_name: item.service_external_name,
+        service_internal_name: item.service_internal_name,
+        purchaseButton,
+        infoButton,
+      };
+      return {
+        ...returnObj,
+      };
+    }
+  );
+
   return (
     <div>
       {/* Heading */}
@@ -22,13 +50,15 @@ const page = () => {
       </TextHelper>
       {/* Service List */}
       <div className="flex flex-row flex-wrap justify-center">
-        {services.map((elem, ind) => {
+        {modifiedServicesHelper.map((elem, ind) => {
           return (
             <>
               <ServiceCard
                 data={{
                   heading: elem.service_external_name,
                   desc: elem.service_descp,
+                  leftbutton: elem.purchaseButton,
+                  rightbutton: elem.infoButton,
                 }}
               />
             </>

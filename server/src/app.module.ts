@@ -12,6 +12,8 @@ import { join } from 'path';
 import { AppResolver } from './utils/test.utils';
 import { OrganizationModule } from './graphql/organization/organization.module';
 import { ServicesModule } from './graphql/services/services.module';
+import { authMiddleware } from './utils/middleware.utils';
+import { GraphQLError } from 'graphql';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,6 +25,15 @@ import { ServicesModule } from './graphql/services/services.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       path: '/api/v1',
       sortSchema: true,
+      context: async ({ req }) => {
+        const context = authMiddleware(req);
+        if (!(await context).user) {
+          throw new GraphQLError('Unauthorized: Invalid Token', {
+            extensions: { code: 'UNAUTHORIZED' },
+          });
+        }
+        return context;
+      },
       // useGlobalPrefix: '/api/v1',
       // include: [TicketsController],
     }),
