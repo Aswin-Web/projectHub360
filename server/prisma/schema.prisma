@@ -17,6 +17,8 @@ model User {
   Organization Organization[]
 
   SubOrganization SubOrganization[]
+
+  OrgUsers OrgUsers[]
 }
 
 model Organization {
@@ -43,6 +45,11 @@ model SubOrganization{
   org Organization @relation(fields: [org_id],references: [org_id])
   user User @relation(fields: [user_id],references: [user_id])
 }
+enum SERVICETYPE{
+  TICKETING
+  TABLE
+  PRODUCT
+}
 
 // Services
 model Services{
@@ -51,6 +58,7 @@ model Services{
   service_external_name String 
   service_descp String?
   service_icon String?
+  service_type SERVICETYPE @default(PRODUCT)
   order_no Int @default(0)
   disable Boolean @default(true)
   created_at DateTime @default(now())
@@ -58,11 +66,7 @@ model Services{
 
   OrgServices OrgServices[]
 } 
-enum SERVICETYPE{
-  TICKETING
-  TABLE
-  PRODUCT
-}
+
 
 model OrgServices {
   org_service_id String @id @default(uuid())
@@ -70,8 +74,8 @@ model OrgServices {
   service_type SERVICETYPE 
   org_user_id Int 
   org_id Int 
-  created_at DateTime
-  updated_at DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
   org Organization @relation(fields: [org_id],references: [org_id])
   org_user OrgUsers @relation(fields: [org_user_id],references: [org_user_id])
   service Services @relation(fields: [service_id],references: [service_id])
@@ -80,8 +84,9 @@ model OrgServices {
 model OrgUsers {
   org_user_id Int @id @default(autoincrement())
   org_id Int 
-  user_id Int
+  user_id String
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
   OrgServices OrgServices[]
+  user User @relation(fields: [user_id],references: [user_id])
 }

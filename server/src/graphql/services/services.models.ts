@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Services } from '@prisma/client';
+import { $Enums, Services } from '@prisma/client';
 @ObjectType()
 export class ServiceObj implements Services {
   @Field()
@@ -18,6 +18,8 @@ export class ServiceObj implements Services {
   service_id: number;
   @Field()
   service_internal_name: string;
+  @Field()
+  service_type: $Enums.SERVICETYPE;
   @Field()
   updated_At: Date;
 }

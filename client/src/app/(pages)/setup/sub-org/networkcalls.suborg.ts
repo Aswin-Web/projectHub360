@@ -1,20 +1,19 @@
 import { client } from "@/config/apollo-client";
 import { gql } from "@apollo/client";
 
-export const getServices = async () => {
+export const getSubService = async () => {
   const { data } = await client.query({
     query: gql`
-      query Services {
-        getServices {
-          service_external_name
-          service_internal_name
-          service_descp
-          service_id
+      query SubOrg {
+        getAllSubOrg {
+          sub_org_id
+          sub_external_name
         }
       }
     `,
   });
-  return data.getServices;
+  console.log("🚀 ~ getSubService ~ data:", data)
+  return data.getAllSubOrg;
 };
 export interface BodyCreateSubOrgINT {
   sub_external_name: string;
@@ -22,7 +21,7 @@ export interface BodyCreateSubOrgINT {
 export const createSubOrgService = async (org_name: string) => {
   const { data } = await client.mutate({
     mutation: gql`
-      mutation createSubOrgService($input: BodyCreateSubOrgINT!) {
+      mutation createSubOrgService($input: CreateSubOrgInput!) {
         createSubOrg(input: $input) {
           sub_external_name
         }

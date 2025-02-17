@@ -14,6 +14,7 @@ import { OrganizationModule } from './graphql/organization/organization.module';
 import { ServicesModule } from './graphql/services/services.module';
 import { authMiddleware } from './utils/middleware.utils';
 import { GraphQLError } from 'graphql';
+import { SubOrgModule } from './graphql/sub-org/sub-org.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -34,11 +35,22 @@ import { GraphQLError } from 'graphql';
         }
         return context;
       },
+      logger: {
+        info: (message, ...args) =>
+          console.info('[GraphQL Info]', message, ...args),
+        warn: (message, ...args) =>
+          console.warn('[GraphQL Warn]', message, ...args),
+        debug: (message, ...args) =>
+          console.debug('[GraphQL Debug]', message, ...args),
+        error: (message, ...args) =>
+          console.error('[GraphQL Error]', message, ...args),
+      },
       // useGlobalPrefix: '/api/v1',
       // include: [TicketsController],
     }),
     OrganizationModule,
     ServicesModule,
+    SubOrgModule,
   ],
   controllers: [AppController, AuthController],
   providers: [

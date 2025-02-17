@@ -1,15 +1,21 @@
 "use client";
 import TextHelper from "@/components/text/TextHelper";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import PopupLayout from "../../../../components/layout/PopUp/PopupLayout";
 import CreateASubOrgDialog from "./CreateASubOrg";
-import { createSubOrgService } from "./networkcalls.suborg";
+import { createSubOrgService, getSubService } from "./networkcalls.suborg";
+import ServiceCard from "@/components/ServiceCard";
 
 const page = () => {
   const [showPopup, setShowpopup] = useState(false);
   // const [subOrgName, setSubOrgName] = useState("");
-
+  const [subOrgs, setSubOrg] = useState([]);
+  useEffect(() => {
+    getSubService()
+      .then((x) => setSubOrg(x))
+      .catch((e) => console.log(e));
+  }, []);
   const submitSubOrgCreate = (data: string) => {
     createSubOrgService(data)
       .then(() => alert("created successfully"))
@@ -42,6 +48,20 @@ const page = () => {
         )}
       </div>
       {/* Body */}
+      <div className="flex flex-wrap justify-center">
+        {subOrgs.map((elem: { sub_external_name: string }, ind) => (
+          <>
+            <ServiceCard
+              data={{
+                heading: elem.sub_external_name,
+                desc: "testing",
+                leftbutton: <></>,
+                rightbutton: <>View More</>,
+              }}
+            />
+          </>
+        ))}
+      </div>
     </div>
   );
 };

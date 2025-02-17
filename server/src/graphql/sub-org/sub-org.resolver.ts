@@ -1,25 +1,39 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Context,
+  Field,
+  InputType,
+  Mutation,
+  Query,
+  Resolver,
+} from '@nestjs/graphql';
 import { SubOrgObj } from './sub-org.model';
 import { SubOrgService } from './sub-org.service';
 
-export interface BodyCreateSubOrgINT {
+@InputType()
+export class CreateSubOrgInput {
+  @Field()
   sub_external_name: string;
 }
 
 @Resolver()
 export class SubOrgResolver {
-  constructor(private readonly subOrgservice: SubOrgService) {}
+  constructor(readonly subOrgservice: SubOrgService) {}
   @Mutation(() => SubOrgObj)
   async createSubOrg(
-    @Args('input') data: BodyCreateSubOrgINT,
+    @Args('input') data: CreateSubOrgInput,
     @Context() context,
   ) {
-    console.log('🚀 ~ SubOrgResolver ~ createSubOrg ~ data:', data);
-
+    const { org_id, id } = context.user;
     return this.subOrgservice.createASubOrg({
-      org_id: context.org_id,
+      org_id: org_id,
       sub_external_name: data.sub_external_name,
-      user_id: context.user_id,
+      user_id: id,
     });
+  }
+
+  @Query(() => [SubOrgObj])
+  async getAllSubOrg() {
+    return await this.subOrgservice.getAllSubOrg();
   }
 }

@@ -18,4 +18,11 @@ export class SubOrgService {
       },
     });
   }
+  async getAllSubOrg() {
+    return await this.prisma.subOrganization.findMany({
+      orderBy: {
+        org_id: 'desc',
+      },
+    });
+  }
 }

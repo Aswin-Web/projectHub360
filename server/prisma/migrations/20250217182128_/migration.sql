@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Services` ADD COLUMN `service_type` ENUM('TICKETING', 'TABLE', 'PRODUCT') NOT NULL DEFAULT 'PRODUCT';
