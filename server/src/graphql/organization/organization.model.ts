@@ -25,3 +25,26 @@ export class OrganizationObj implements Organization {
   @Field(() => [SubOrgObj])
   SubOrganization: SubOrgObj[];
 }
+@ObjectType()
+export class OrgServicesObject {
+  @Field(() => Int)
+  org_id: number;
+
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => String)
+  org_service_id: string;
+
+  @Field(() => Int)
+  service_id: number;
+
+  // @Field(() => SERVICETYPE) // Ensure SERVICETYPE is a valid GraphQL enum
+  // service_type: SERVICETYPE;
+
+  @Field(() => Int)
+  org_user_id: number;
+
+  @Field(() => Date)
+  updated_at: Date;
+}

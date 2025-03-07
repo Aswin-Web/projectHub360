@@ -15,6 +15,8 @@ import { ServicesModule } from './graphql/services/services.module';
 import { authMiddleware } from './utils/middleware.utils';
 import { GraphQLError } from 'graphql';
 import { SubOrgModule } from './graphql/sub-org/sub-org.module';
+import { ApolloServerPlugin } from '@apollo/server';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,6 +28,19 @@ import { SubOrgModule } from './graphql/sub-org/sub-org.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       path: '/api/v1',
       sortSchema: true,
+      plugins: [
+        {
+          requestDidStart(requestContext) {
+            console.log(`🔹 Received request: ${requestContext.request.query}`);
+
+            return Promise.resolve({
+              willSendResponse(responseContext) {
+                console.log(`✅ Response sent:success`);
+              },
+            });
+          },
+        } as ApolloServerPlugin,
+      ],
       context: async ({ req }) => {
         const context = authMiddleware(req);
         if (!(await context).user) {

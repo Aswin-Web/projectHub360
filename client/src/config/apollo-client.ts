@@ -10,7 +10,8 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // Ensure `localStorage` is accessed only on the client
-  const token = typeof window !== "undefined" ? localStorage.getItem("ticket") : null;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("ticket") : null;
 
   return {
     headers: {
@@ -20,10 +21,32 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+// const createApolloClient = () => {
+//   return new ApolloClient({
+//     link: authLink.concat(httpLink), // Combine auth middleware with HTTP link
+//     // cache: new InMemoryCache(),
+//     cache: new InMemoryCache(),
+//   },{def});
+// };
+
 const createApolloClient = () => {
   return new ApolloClient({
     link: authLink.concat(httpLink), // Combine auth middleware with HTTP link
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      addTypename: false, // Disables automatic __typename fields
+      resultCaching: false, // Disables caching responses
+    }),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: "no-cache", // Always fetch fresh data
+      },
+      query: {
+        fetchPolicy: "no-cache",
+      },
+      mutate: {
+        fetchPolicy: "no-cache",
+      },
+    },
   });
 };
 

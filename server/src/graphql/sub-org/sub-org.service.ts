@@ -19,6 +19,7 @@ export class SubOrgService {
     });
   }
   async getAllSubOrg() {
+    console.log('Suborgg');
     return await this.prisma.subOrganization.findMany({
       orderBy: {
         org_id: 'desc',

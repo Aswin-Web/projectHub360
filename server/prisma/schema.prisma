@@ -32,6 +32,8 @@ model Organization {
 
   SubOrganization SubOrganization[]
   OrgServices OrgServices[]
+
+  SubOrgServices SubOrgServices[]
 }
 
 model SubOrganization{
@@ -79,6 +81,18 @@ model OrgServices {
   org Organization @relation(fields: [org_id],references: [org_id])
   org_user OrgUsers @relation(fields: [org_user_id],references: [org_user_id])
   service Services @relation(fields: [service_id],references: [service_id])
+
+  SubOrgServices SubOrgServices[]
+}
+
+model SubOrgServices {
+  sub_org_service_id String @id @default(uuid())
+  org_service_id String
+  org_id Int
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+  org_service OrgServices @relation(fields: [org_service_id],references: [org_service_id])
+  org Organization @relation(fields: [org_id],references: [org_id])
 }
 
 model OrgUsers {

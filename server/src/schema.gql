@@ -26,6 +26,7 @@ type OrgServicesObj {
   org_id: Float!
   org_service_id: String!
   org_user_id: Float!
+  service: ServiceObj!
   service_id: Float!
   service_type: String!
   updated_at: DateTime!
@@ -42,6 +43,7 @@ type OrganizationObj {
 }
 
 type Query {
+  getAllPurchase: [OrgServicesObj!]!
   getAllSubOrg: [SubOrgObj!]!
   getServices: [ServiceObj!]!
   hello: String!
