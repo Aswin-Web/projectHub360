@@ -24,7 +24,7 @@ export class JwtService {
           org_user_id: org_user.org_user_id,
         }, // Avoid passing the full user object for security
         this.SSO_KEY,
-        { expiresIn: '1h' }, // Set an expiration time
+        { expiresIn: '24h' }, // Set an expiration time
         (err, token) => {
           if (err) {
             reject(err);

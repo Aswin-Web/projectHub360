@@ -19,7 +19,8 @@ export default {
         logoMain2:"#872341",
         darkColor:"#FFFFFF",
         lightColor:"#F8F8F8",
-        blackColor:"#2d2d2d"
+        blackColor:"#2d2d2d",
+        borderLight:"border-slate-300"
       },
     },
   },
