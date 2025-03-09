@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarLayout from "../../../components/layout/Navbar/NavbarLayout";
+import NavbarLayout from "../../../../components/layout/Navbar/NavbarLayout";
 import { ProductName } from "@/components/Data";
 import NavbarMenu from "@/components/layout/Navbar/NavbarMenu";
 import SidebarLayout from "@/components/layout/Sidebar/SidebarLayout";

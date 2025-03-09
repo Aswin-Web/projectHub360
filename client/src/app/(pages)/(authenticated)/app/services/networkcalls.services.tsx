@@ -1,6 +1,6 @@
 import { client } from "@/config/apollo-client";
 import { gql } from "@apollo/client";
-import { modifyDate } from "../../../../config/getDate";
+import { modifyDate } from "../../../../../config/getDate";
 
 export const getPurchasedSeervices = async () => {
   const { data } = await client.query({

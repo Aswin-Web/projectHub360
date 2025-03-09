@@ -6,9 +6,12 @@ import { getPurchasedSeervices } from "./networkcalls.services";
 import Paragraph from "@/components/text/Paragraph";
 import Button from "@/components/Button";
 import SubHeading from "@/components/text/SubHeading";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [services, setServices] = useState([]);
+  const router = useRouter();
+
   console.log("🚀 ~ page ~ services:", services);
   useEffect(() => {
     getPurchasedSeervices()
@@ -26,7 +29,14 @@ const page = () => {
       {/* List of Service */}
       <div className="flex flex-wrap w-11/12 items-center justify-center ">
         {services.map(
-          (item: { service_name: string; description: string }, elem) => {
+          (
+            item: {
+              service_name: string;
+              description: string;
+              internal_name: string;
+            },
+            elem
+          ) => {
             return (
               <div
                 key={elem}
@@ -51,7 +61,10 @@ const page = () => {
                     </button>
                   </div>
                   <div className="flex-1 text-center">
-                    <button className="text-xs flex-1 border-2 border-borderLight bg-lightColor px-4 py-1 rounded-lg">
+                    <button
+                      className="text-xs flex-1 border-2 border-borderLight bg-lightColor px-4 py-1 rounded-lg"
+                      onClick={() => router.push(item.internal_name)}
+                    >
                       View
                     </button>
                   </div>

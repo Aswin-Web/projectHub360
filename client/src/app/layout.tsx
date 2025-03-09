@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Provider } from "@/components/ui/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,9 +24,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body >
-        <div className=" min-h-[100vh] w-[100vw]">{children}</div>
+    <html suppressHydrationWarning>
+      <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+      <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+      ></link>
+      <body>
+        <div className=" min-h-[100vh] w-[100vw]">
+          {/* <Provider> */}
+            <div className=" text-black bg-lightColor">{children}</div>
+          {/* </Provider> */}
+        </div>
       </body>
     </html>
   );
